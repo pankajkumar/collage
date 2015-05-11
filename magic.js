@@ -142,17 +142,7 @@ angular.module('collage', []).
                 }
             });
         };
-    }).directive("svgobject", ['$compile','$sce',function($compile,$sce) {
-    return {
-        restrict: "E",
-        replace:true,
-        template:"<img src='data:image/svg+xml;base64,{{data}}'/>",
-        link: function (scope, element, attrs) {
-            scope.data = btoa($sce.trustAsHtml($compile(attrs.data)(scope)));
-
-        }
-    }
-    }]).directive("minicolor", function() {
+    }).directive("minicolor", function() {
         return {
             restrict: "A",
             link: function (scope, element, attrs) {
