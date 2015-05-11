@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html ng-app="collage" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8"/>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="bower_components/jquery-minicolors/jquery.minicolors.min.js"></script>
+    <script src="bower_components/fabric/dist/fabric.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+
+
+    <link rel="stylesheet" href="bower_components/jquery-ui/themes/base/jquery-ui.min.css">
+    <link rel="stylesheet" href="bower_components/jquery-minicolors/jquery.minicolors.css">
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div ng-controller="CollageController">
+    <!-- used for image thumb generation -->
+    <div style="display:none">
+
+        <canvas id="thumbnail"></canvas>
+    </div>
+    <!-- end -->
+    <div class="container-fluid">
+        <h1>Create your collage</h1>
+        <div class="row">
+            <div class="col-md-9 form-inline">
+                <input type="text" class="form-control" placeholder="Collage name" ng-model="name">
+                <button class="btn btn-default" ng-click="save(name)">Save</button>
+                |
+                <button class="btn btn-default" ng-click="download()">Download</button>
+                |
+                <button class="btn btn-default" ng-click="new()">Create new collage</button>
+                |
+                <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="sendToBack()">
+                    <span class="glyphicon glyphicon-fast-backward" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="sendBackwards()">
+                    <span class="glyphicon glyphicon-backward" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="bringForward()">
+                    <span class="glyphicon glyphicon-forward" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="bringToFront()">
+                    <span class="glyphicon glyphicon-fast-forward" aria-hidden="true"></span>
+                </button>
+                <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="delete()">
+                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                </button>
+                <input type="text" class="form-control" placeholder="BG color" minicolor ng-model="bgcolor">
+            </div>
+            <div class="col-md-3 form-inline">
+                <div class="form-group">
+
+                    <input class="form-control" type="text" ng-model="query" placeholder="Search images" ng-keyup="getImageData(query)">
+                    <button type="button" class="btn btn-default" aria-label="Left Align" ng-click="getImageData(query)">
+                        Search
+                    </button>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+
+            <div class="col-md-9" class="mydroppable">
+                <canvas id="canvas" fabric-canvas width="900" height="500"></canvas>
+
+            </div>
+            <div class="col-md-3">
+                <div class="h500">
+                <div ng-repeat="image in images">
+                    <p><img collage-draggable width="200" ng-src="{{getImageURL(image)}}"/></p>
+                </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="w200" ng-repeat="(name,canvasobj) in canvasList" ng-click="loadCanvas(name,canvasobj)">
+                <img src="{{canvasobj.thumb}}" />
+                 {{name}}
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript" src="magic.js"></script>
+</body>
+</html>

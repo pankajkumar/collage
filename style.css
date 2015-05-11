@@ -1,0 +1,19 @@
+.red{
+    color:red;
+}
+.row{
+    padding-top:10px;
+}
+.h500{
+    height:500px;
+    overflow: scroll;
+}
+.w200{
+    width: 200px;
+    padding-right: 10px;
+    float: left;
+    cursor: pointer;
+}
+.minicolors{
+    display:inline-block;
+}
